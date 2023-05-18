@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gps.Views.TrackPage"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:vm="clr-namespace:Gps.ViewModels"
+             xmlns:models="clr-namespace:Gps.Models"
+             Title="Tracks"
+             x:DataType="vm:TrackViewModel" 
+             
+             Background="#EFEEF4">
+
+    <ContentPage.Resources>
+        
+        
+        <DataTemplate x:Key="Page1">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130" />
+                    <RowDefinition Height="130" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="0,10,0,0">
+                    <Grid>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Row="0"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"                                     
+                                   Margin="0,10,0,0">
+                            <Label 
+                                    Text="{Binding Track.Distansion,StringFormat='{0} km'}" 
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"/>
+                            <Label Text="Distance" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <BoxView Color="Black" HeightRequest="1" Grid.Row="1" Margin="20,0,20,0" VerticalOptions="Start"/>
+                        <BoxView 
+                            Grid.Row="1"
+                            Color="Black"
+                            WidthRequest="1" 
+                            HeightRequest="30" />
+                        <StackLayout Grid.Row="1"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="Center"                                     
+                                   Margin="50,0,0,0">
+                            <Label Text="{Binding Track.Duration}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Duration" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1"
+                                     HorizontalOptions="EndAndExpand"
+                                     VerticalOptions="Center"                                     
+                                   Margin="0,0,50,0">
+                            <Label Text="{Binding Track.Location}" 
+                                   FontSize="16" 
+                                   FontFamily="Bold"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Location" 
+                                   Grid.Column="1"
+                                   HorizontalOptions="Center"
+                                   FontSize="8"/>
+                        </StackLayout>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*" />
+                        <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="0"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="End"                                     
+                                   Margin="50,0,0,0">
+                            <Label Text="{Binding Track.AverageSpeed, StringFormat='{0} km/h'}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Average Speed" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="Center"                                     
+                                   Margin="50,0,0,0">
+                            <Label Text="{Binding Track.AverageAltitude, StringFormat='{0} m'}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Average Altitude" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="0"  Margin="0,10,0,10" HorizontalOptions="End"/>
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="1"  Margin="0,10,0,20" HorizontalOptions="End"/>
+                        <BoxView Color="Black" HeightRequest="1" Grid.Row="1"  Margin="20,0,0,0" VerticalOptions="Start"/>
+                        <BoxView Color="Black" HeightRequest="1" Grid.Row="1" Grid.Column="1"  Margin="0,0,20,0" VerticalOptions="Start"/>
+                        <StackLayout Grid.Row="0"
+                                     Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End"                                     
+                                   Margin="50,0,0,0">
+                            <Label Text="{Binding Track.TopSpeed,StringFormat='{0} km/h'}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Top Speed" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"                                     
+                                   Margin="50,0,0,0">
+                            <Label 
+                                   FontSize="16"
+                                   FontFamily="Bold"
+                                HorizontalOptions="Center"
+                                   >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Track.Altitude1}" />
+                                        <Span Text=" m - " />
+                                        <Span Text="{Binding Track.Altitude2}" />
+                                        <Span Text=" m" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            
+                            <Label Text="Altitude" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Margin="0,10,0,0">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="0"  Margin="0,10,0,10" HorizontalOptions="End"/>
+                        <StackLayout
+                                     Grid.Column="0"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center">
+                            <Label Text="{Binding Track.IdleTime}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Idle Time" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout
+                                     Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center">
+                            <Label Text="{Binding Track.TravelTime}"
+                                   FontSize="16" HorizontalOptions="Center"
+                                   FontFamily="Bold"
+                                   />
+                            <Label Text="Travel Time" 
+                                   FontSize="8" 
+                                   HorizontalOptions="Center"/>
+                        </StackLayout>
+                        
+                    </Grid>
+                </Border>
+                <Label Grid.Row="3" Padding="10,20,0,0">LAST LOCATION</Label>
+                <Border Grid.Row="3" Margin="0,50,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="0" Grid.Column="0" Margin="0,10,0,10" HorizontalOptions="End"/>
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="1" Grid.Column="0" Margin="0,10,0,10" HorizontalOptions="End"/>
+                        <BoxView Color="Black" WidthRequest="1" Grid.Row="2" Grid.Column="0" Margin="0,10,0,10" HorizontalOptions="End"/>
+                        <BoxView Color="Black" HeightRequest="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="20,0" VerticalOptions="Start"/>
+                        <BoxView Color="Black" HeightRequest="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="20,0" VerticalOptions="Start"/>
+
+                        <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Track.latitude}" HorizontalOptions="Center" FontSize="16" FontFamily="Bold"/>
+                            <Label Text="Latitude" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Track.Accutacy, StringFormat='{0} m'}" HorizontalOptions="Center" FontSize="16" FontFamily="Bold" />
+                            <Label Text="Accuracy" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Track.latitude, StringFormat='{0} km/h'}" HorizontalOptions="Center" FontSize="16" FontFamily="Bold" />
+                            <Label Text="Latitude" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Track.Longitude}" HorizontalOptions="Center" FontSize="16" FontFamily="Bold" />
+                            <Label Text="Longitude" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="-" HorizontalTextAlignment="Center" FontSize="16" FontFamily="Bold" />
+                            <Label Text="Cource" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding Track.Altitude, StringFormat='{0} m'}" HorizontalTextAlignment="Center" FontSize="16" FontFamily="Bold" />
+                            <Label Text="Altitude" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </Border>
+
+            </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+
+    <material:TabView x:Name="fix">
+        <material:TabView.TabHeaderItemTemplate>
+            <DataTemplate>
+                <Button 
+                    
+                    Text="{Binding Source={x:Reference fix}, Path=Title}"
+                    Command="{Binding Command}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="BackgroundColor" Value="Black" />
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="False">
+                            <Setter Property="BackgroundColor" Value="White" />
+                            <Setter Property="TextColor" Value="Black" />
+                           
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </DataTemplate>
+        </material:TabView.TabHeaderItemTemplate>
+
+        <material:TabItem x:Name="Tab1" Title="Data">
+            <material:TabItem.ContentTemplate>
+                <StaticResourceExtension  Key="Page1"/>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+        
+        <material:TabItem Title="Map">
+            <material:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Image Aspect="Fill" Source="{Binding Track.UrlPhoto}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+    </material:TabView>
+
+</ContentPage>

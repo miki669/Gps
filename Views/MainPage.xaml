@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:Gps.ViewModels"
+			 x:Class="Gps.Views.MainPage"
+             xmlns:models="clr-namespace:Gps.Models"
+			 x:DataType="vm:MainViewModel">
+
+    <ContentPage.Resources >
+        <DataTemplate
+            x:Key="YourItemTemplate">
+            <Border 
+                    Margin="0,10,0,0"
+                    Background="white"
+                    HorizontalOptions="Fill">
+                <Grid InputTransparent="False"
+                      BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Label  
+                        x:DataType="models:Track"
+                        Text="{Binding Name}"
+                           FontFamily="Bold"
+                           FontSize="20"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalOptions="StartAndExpand"
+                           Margin="10,0,0,0"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           TextColor="Black">
+                    </Label>
+                    <BoxView Color="Black" HeightRequest="1" Grid.Row="0" Margin="30,0,0,0" VerticalOptions="End"/>
+                    <Button 
+                        Grid.Column="1"
+                        Grid.RowSpan="3"
+                        Background="white"
+                        HeightRequest="70"
+                        Text=">"
+                        FontSize="Title"
+                        TextColor="Black" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=OpenNewPageCommand}"
+                        CommandParameter="{Binding .}">
+
+                    </Button>
+                    <FlexLayout Direction="Row"
+                                JustifyContent="Center"
+                                AlignItems="Center"
+                                Grid.Row="1">
+                        <StackLayout Margin="0,0,10,0"
+                                     x:DataType="models:Track">
+                            <Label Text="{Binding Day}"/>
+                            <Label Text="{Binding Month}" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+
+                        <BoxView Color="Black" WidthRequest="1" HeightRequest="20" />
+
+                        <StackLayout x:DataType="models:Track" 
+                                   Margin="10,0,10,0">
+                            <Label Text="{Binding Duration}"/>
+                            <Label Text="Duration" FontSize="8" HorizontalOptions="Center"/>
+
+                        </StackLayout>
+
+                        <BoxView Color="Black" WidthRequest="1" HeightRequest="20" />
+
+                        <StackLayout Margin="10,0,10,0" x:DataType="models:Track" >
+                            <Label Text="{Binding Distansion}" Margin="10,0,0,0" />
+                            <Label Text="Distance" FontSize="8" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </FlexLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+
+    <Grid BackgroundColor="#2472BD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label 
+                   Text="Tracks" 
+                   TextColor="White"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"></Label>
+        <Button 
+                HeightRequest="70"
+                WidthRequest="70"
+                HorizontalOptions="End"
+                Grid.Column="3"
+                Background="#2472BD"
+                TextColor="White"
+                FontSize="50"
+                Command="{Binding OpenPopupCommand}"
+                Text="+"/>
+        <ScrollView Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <StackLayout InputTransparent="False"
+                 HorizontalOptions="Fill"
+                 BackgroundColor="Gainsboro">
+                <CollectionView ItemsSource="{Binding Items}"
+                        ItemTemplate="{StaticResource YourItemTemplate}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
